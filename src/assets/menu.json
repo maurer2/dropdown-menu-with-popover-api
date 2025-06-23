@@ -1,0 +1,70 @@
+[
+  {
+    "label": "File",
+    "children": [
+      { "label": "New", "href": "/new" },
+      { "label": "Open", "href": "/open" },
+      {
+        "label": "Recent",
+        "children": [
+          { "label": "Project1", "href": "/recent/project1" },
+          { "label": "Project2", "href": "/recent/project2" },
+          {
+            "label": "More Projects",
+            "children": [
+              { "label": "Project3", "href": "/recent/project3" },
+              { "label": "Project4", "href": "/recent/project4" }
+            ]
+          }
+        ]
+      },
+      { "label": "Exit", "href": "/exit" }
+    ]
+  },
+  {
+    "label": "Edit",
+    "children": [
+      { "label": "Undo", "href": "/undo" },
+      { "label": "Redo", "href": "/redo" },
+      { "label": "Cut", "href": "/cut" },
+      { "label": "Copy", "href": "/copy" },
+      { "label": "Paste", "href": "/paste" },
+      {
+        "label": "Advanced",
+        "children": [
+          { "label": "Find", "href": "/find" },
+          { "label": "Replace", "href": "/replace" }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "View",
+    "children": [
+      { "label": "Zoom In", "href": "/zoom-in" },
+      { "label": "Zoom Out", "href": "/zoom-out" },
+      { "label": "Full Screen", "href": "/full-screen" },
+      {
+        "label": "Layout",
+        "children": [
+          { "label": "Split View", "href": "/layout/split" },
+          { "label": "Single View", "href": "/layout/single" }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Help",
+    "children": [
+      { "label": "Documentation", "href": "/docs" },
+      { "label": "About", "href": "/about" },
+      {
+        "label": "Support",
+        "children": [
+          { "label": "Contact", "href": "/support/contact" },
+          { "label": "FAQ", "href": "/support/faq" }
+        ]
+      }
+    ]
+  }
+]

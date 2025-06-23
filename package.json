@@ -11,6 +11,10 @@
     "preview": "vite preview",
     "format": "prettier --write ."
   },
+  "imports": {
+    "#src": "./src/*",
+    "#styled-system": "./styled-system/*"
+  },
   "dependencies": {
     "@eslint/js": "^9.29.0",
     "@pandacss/dev": "^0.54.0",
@@ -24,8 +28,10 @@
     "prettier": "^3.6.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "type-fest": "^4.41.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
