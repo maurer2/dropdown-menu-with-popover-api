@@ -1,7 +1,7 @@
 import { css } from '#styled-system/css';
 
 export const wrapper = css({
-  // width: min('100%', '1280px'),
+  // width: min('100%', '1280px'), // doesn't work
   width: '100%',
   padding: '1rem',
   maxWidth: '1000px',
@@ -13,14 +13,15 @@ export const pageTitle = css({
 });
 
 export const listFirstLevel = css({
-  display: 'flex',
+  display: 'grid',
   gap: '1rem',
+  gridAutoFlow: 'column',
+  gridAutoColumns: '1fr',
 });
 
 export const listFirstLevelEntry = css({
   position: 'relative',
   border: '1px solid black',
-  flexBasis: '100%',
 
   '&:is(:hover, :focus-within)': {
     backgroundColor: 'green',
@@ -34,6 +35,8 @@ export const listFirstLevelEntry = css({
 export const listFirstLevelEntryLink = css({
   display: 'block',
   padding: '1rem',
+  height: '100%',
+  alignContent: 'center', // works on block level elements
 
   '&:is(:hover, :focus)': {
     backgroundColor: 'red',
