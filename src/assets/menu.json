@@ -54,7 +54,7 @@
     ]
   },
   {
-    "label": "Help",
+    "label": "Help with a label of considerable length",
     "children": [
       { "label": "Documentation", "href": "/docs" },
       { "label": "About", "href": "/about" },
@@ -66,5 +66,10 @@
         ]
       }
     ]
+  },
+  {
+    "label": "Settings",
+    "href": "/settings",
+    "children": []
   }
 ]

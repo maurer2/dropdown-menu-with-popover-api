@@ -2,6 +2,7 @@ import type { MenuStructure } from '#src/types';
 import {
   wrapper,
   pageTitle,
+  menu,
   listFirstLevel,
   listFirstLevelEntry,
   listFirstLevelEntryLink,
@@ -19,32 +20,34 @@ function ClassicMenu({ menuEntries }: ClassicMenuProps) {
     <article className={wrapper}>
       <h2 className={pageTitle}>Classic menu</h2>
 
-      <nav aria-labelledby="classic menu">
+      <nav className={menu} aria-labelledby="classic menu">
         <ul className={listFirstLevel}>
           {menuEntries.map((entryFirstLevel) => (
             <li className={listFirstLevelEntry}>
               <a
                 key={entryFirstLevel.label}
-                href="#"
+                href={entryFirstLevel.href ? entryFirstLevel.href : '#'}
                 className={listFirstLevelEntryLink}
-                tabIndex={0}
+                // tabIndex={0}
               >
                 {entryFirstLevel.label}
               </a>
-              <ul className={listSecondLevel}>
-                {entryFirstLevel.children.map((entrySecondLevel) => (
-                  <li className={listSecondLevelEntry}>
-                    <a
-                      key={entrySecondLevel.label}
-                      href={entrySecondLevel.href}
-                      className={listSecondLevelEntryLink}
-                      tabIndex={0}
-                    >
-                      {entrySecondLevel.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              {entryFirstLevel.children?.length ? (
+                <ul className={listSecondLevel}>
+                  {entryFirstLevel.children.map((entrySecondLevel) => (
+                    <li className={listSecondLevelEntry}>
+                      <a
+                        key={entrySecondLevel.label}
+                        href={entrySecondLevel.href}
+                        className={listSecondLevelEntryLink}
+                        // tabIndex={0}
+                      >
+                        {entrySecondLevel.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           ))}
         </ul>
