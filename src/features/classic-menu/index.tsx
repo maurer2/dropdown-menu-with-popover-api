@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { MenuStructure } from '#src/types';
 import {
   wrapper,
@@ -23,7 +24,14 @@ function ClassicMenu({ menuEntries }: ClassicMenuProps) {
       <nav className={menu} aria-labelledby="classic menu">
         <ul className={listFirstLevel}>
           {menuEntries.map((entryFirstLevel) => (
-            <li className={listFirstLevelEntry}>
+            <li
+              className={listFirstLevelEntry}
+              style={
+                {
+                  '--has-children': Boolean(entryFirstLevel.children?.length).toString(),
+                } as CSSProperties
+              }
+            >
               <a
                 key={entryFirstLevel.label}
                 href={entryFirstLevel.href ? entryFirstLevel.href : '#'}

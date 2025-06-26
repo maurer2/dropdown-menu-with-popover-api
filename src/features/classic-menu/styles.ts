@@ -33,43 +33,8 @@ export const menu = css({
 
 export const listFirstLevelEntry = css({
   position: 'relative',
-
-  // debug
-  // '&:not(:has(> ul))': {
-  //   background: 'blue',
-  // },
-
-  // has second level submenu
-  '&:has(> ul)': {
-    _before: {
-      content: 'none',
-      display: 'block',
-      position: 'absolute',
-      inset: 0,
-      right: '1rem',
-      justifySelf: 'end',
-      alignSelf: 'center',
-    },
-  },
-
-  // has second level submenu, but said submenu is not expanded
-  // '&:has(> ul)': { // gets overridden when submenu is expanded
-  '&:has(> ul):not(:is(:hover, :focus-within))': {
-    // incorrect, also includes entries without second level submenu
-    // '&:not(:has(> ul):is(:hover, :focus-within))': {
-    // contentVisibility: 'hidden',
-
-    _before: {
-      content: '"+"',
-    },
-  },
-
-  // has second level submenu and said submenu is expanded
-  '&:has(> ul):is(:hover, :focus-within)': {
-    _before: {
-      content: '"-"',
-    },
-  },
+  containerName: 'first-level-entry',
+  containerType: 'normal',
 
   '&:has(> ul):is(:hover, :focus-within) > ul': {
     display: 'flex',
@@ -80,16 +45,6 @@ export const listFirstLevelEntry = css({
     _starting: {
       height: 0,
     },
-  },
-
-  // first level entry link - space for +/- icon
-  '&:has(> ul) > a': {
-    paddingRight: '2.5rem',
-  },
-
-  // first level entry link - keep highlighted when submenu is expanded
-  '&:has(> ul):is(:hover, :focus-within) > a': {
-    backgroundColor: 'var(--link-hover-focus-background-color)',
   },
 });
 
@@ -104,6 +59,40 @@ export const listFirstLevelEntryLink = css({
 
   '&:is(:hover, :focus)': {
     backgroundColor: 'var(--link-hover-focus-background-color)',
+  },
+
+  // keep highlighted when submenu is hovered or focused
+  ':is(:hover, :focus-within) > &': {
+    backgroundColor: 'var(--link-hover-focus-background-color)',
+  },
+
+  // +/- icon logic
+  '@container style(--has-children: true)': {
+    paddingRight: '2.5rem',
+
+    _before: {
+      content: 'none',
+      display: 'block',
+      position: 'absolute',
+      inset: 0,
+      right: '1rem',
+      justifySelf: 'end',
+      alignSelf: 'center',
+    },
+
+    // submenu is not expanded
+    ':not(:is(:hover, :focus-within)) > &': {
+      _before: {
+        content: '"+"',
+      },
+    },
+
+    // submenu is expanded
+    ':is(:hover, :focus-within) > &': {
+      _before: {
+        content: '"-"',
+      },
+    },
   },
 });
 
@@ -133,6 +122,6 @@ export const listSecondLevelEntryLink = css({
   backgroundColor: 'var(--link-base-background-color)',
 
   '&:is(:hover, :focus)': {
-    backgroundColor: 'red',
+    backgroundColor: 'var(--link-hover-focus-background-color)',
   },
 });
