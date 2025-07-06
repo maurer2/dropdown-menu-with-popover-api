@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+
 import type { MenuStructure } from '#src/types';
 import {
   wrapper,

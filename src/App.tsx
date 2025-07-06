@@ -11,9 +11,9 @@ function App() {
       <hr />
 
       <ClassicMenu menuEntries={menuJSON} />
-      {/* <hr /> */}
+      <hr />
 
-      {/* <PopoverMenu menuEntries={menuJSON} /> */}
+      <PopoverMenu menuEntries={menuJSON} />
     </main>
   );
 }

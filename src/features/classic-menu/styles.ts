@@ -12,13 +12,6 @@ export const pageTitle = css({
   marginBottom: '1rem',
 });
 
-export const listFirstLevel = css({
-  display: 'grid',
-  gap: '1rem',
-  gridAutoFlow: 'column',
-  gridAutoColumns: 'minmax(0, 1fr)',
-});
-
 export const menu = css({
   '--transition-duration': '0.25s',
   '--link-base-background-color': 'white',
@@ -28,7 +21,17 @@ export const menu = css({
     '--transition-duration': '0',
   },
 
+  position: 'relative',
   interpolateSize: 'allow-keywords',
+  // isolation: 'isolate',
+  zIndex: 1,
+});
+
+export const listFirstLevel = css({
+  display: 'grid',
+  gap: '1rem',
+  gridAutoFlow: 'column',
+  gridAutoColumns: 'minmax(0, 1fr)',
 });
 
 export const listFirstLevelEntry = css({
@@ -38,9 +41,10 @@ export const listFirstLevelEntry = css({
 
   '&:has(> ul):is(:hover, :focus-within) > ul': {
     display: 'flex',
-    // height: ['auto', 'calc-size(auto, size)'], // only works if another transition is is progress
+    // height: ['auto', 'calc-size(auto, size)'], // only works if another transition is in progress
     height: 'auto',
     // contentVisibility: 'visible',
+    background: 'gray.200',
 
     _starting: {
       height: 0,
