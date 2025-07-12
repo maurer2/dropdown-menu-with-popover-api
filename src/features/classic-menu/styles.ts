@@ -24,7 +24,7 @@ export const menu = css({
   position: 'relative',
   interpolateSize: 'allow-keywords',
   // isolation: 'isolate',
-  zIndex: 1,
+  zIndex: 2,
 });
 
 export const listFirstLevel = css({

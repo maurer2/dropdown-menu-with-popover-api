@@ -52,18 +52,15 @@ export const listSecondLevel = css({
   display: 'flex',
   gap: '1rem',
   flexDirection: 'column',
-  backgroundColor: 'blue',
   positionAnchor: '--first-level-entry',
-  positionArea: 'bottom right',
-  // top: 'anchor(--first-level-entry 100%)',
-  // top: 'calc(1rem + anchor(top))',
-  insetBlock: 'anchor(top)',
-  insetInline: 'calc(anchor(end) + 1rem)',
-  // justifySelf: 'anchor-center',
-  // justifySelf: 'stretch',
-  zIndex: 5,
-  // width: 'anchor-size(--first-level-entry inline-size)',
+  positionTryFallbacks: '--to-the-side',
+
+  // below
+  positionArea: 'bottom center',
+  insetBlock: 'calc(anchor(bottom) + 1rem)',
+  insetInline: 'anchor(start)',
   width: 'anchor-size(inline)',
+  zIndex: 1,
 });
 
 export const listSecondLevelEntry = css({
