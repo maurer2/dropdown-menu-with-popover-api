@@ -49,13 +49,37 @@ export const listFirstLevelEntryLink = css({
 
 export const listSecondLevel = css({
   position: 'absolute',
-  padding: '1rem',
-  border: '1px solid black',
-  backgroundColor: 'var(--link-base-background-color)',
+  display: 'flex',
+  gap: '1rem',
+  flexDirection: 'column',
+  backgroundColor: 'blue',
   positionAnchor: '--first-level-entry',
   positionArea: 'bottom right',
   // top: 'anchor(--first-level-entry 100%)',
-  top: 'calc(1rem + anchor(bottom))',
-  // left: 'anchor(center)',
-  justifySelf: 'anchor-center',
+  // top: 'calc(1rem + anchor(top))',
+  insetBlock: 'anchor(top)',
+  insetInline: 'calc(anchor(end) + 1rem)',
+  // justifySelf: 'anchor-center',
+  // justifySelf: 'stretch',
+  zIndex: 5,
+  // width: 'anchor-size(--first-level-entry inline-size)',
+  width: 'anchor-size(inline)',
+});
+
+export const listSecondLevelEntry = css({
+  position: 'relative',
+  minWidth: 'max-content',
+  maxWidth: '100%',
+});
+
+export const listSecondLevelEntryLink = css({
+  display: 'block',
+  padding: '1rem',
+  border: '1px solid black',
+  overflow: 'hidden',
+  backgroundColor: 'var(--link-base-background-color)',
+
+  '&:is(:hover, :focus)': {
+    backgroundColor: 'var(--link-hover-focus-background-color)',
+  },
 });

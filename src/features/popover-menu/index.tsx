@@ -8,6 +8,8 @@ import {
   listFirstLevelEntry,
   listFirstLevelEntryLink,
   listSecondLevel,
+  listSecondLevelEntry,
+  listSecondLevelEntryLink,
 } from './styles';
 
 type PopoverMenuProps = {
@@ -31,7 +33,22 @@ function PopoverMenu({ menuEntries }: PopoverMenuProps) {
               >
                 {entryFirstLevel.label}
               </a>
-              <div className={listSecondLevel}>Meow</div>
+              {entryFirstLevel.children?.length ? (
+                <ul className={listSecondLevel}>
+                  {entryFirstLevel.children.map((entrySecondLevel) => (
+                    <li className={listSecondLevelEntry}>
+                      <a
+                        key={entrySecondLevel.label}
+                        href={entrySecondLevel.href}
+                        className={listSecondLevelEntryLink}
+                        // tabIndex={0}
+                      >
+                        {entrySecondLevel.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           ))}
         </ul>
