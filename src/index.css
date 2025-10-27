@@ -1,9 +1,1 @@
 @layer reset, base, tokens, recipes, utilities;
-
-@position-try --to-the-side {
-  position-area: center right;
-  inset-block: anchor(top);
-  inset-inline: calc(anchor(end) + 1rem);
-  width: anchor-size(inline);
-  z-index: 5;
-}

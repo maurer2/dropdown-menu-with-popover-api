@@ -1,0 +1,79 @@
+@scope (.popover-wrapper) {
+  :scope {
+    inline-size: min(100%, 1280px);
+    padding: 1rem;
+    margin-inline: auto;
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .menu {
+    --transition-duration: 0.25s;
+    --link-base-background-color: white;
+    --link-hover-focus-background-color: red;
+  }
+
+  @media (prefers-reduced-motion) {
+    .menu {
+      --transition-duration: 0;
+    }
+  }
+
+  .list-first-level {
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  .list-first-level-entry {
+    position: relative;
+  }
+
+  .list-first-level-entry-link {
+    display: block;
+    padding: 1rem;
+    height: 100%;
+    align-content: center;
+    border: 1px solid black;
+    background-color: var(--link-base-background-color);
+    overflow: hidden;
+  }
+
+  .list-first-level-entry-link:is(:hover, :focus) {
+    background-color: var(--link-hover-focus-background-color);
+  }
+
+  .list-second-level {
+    position: absolute;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    /* position-anchor, position-try-fallbacks, position-area, insetBlock, insetInline, width, zIndex are advanced features not supported in classic CSS, so omitted or replaced with best effort */
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    padding-block-start: 1rem;
+  }
+
+  .list-second-level-entry {
+    position: relative;
+    min-width: max-content;
+    max-width: 100%;
+  }
+
+  .list-second-level-entry-link {
+    display: block;
+    padding: 1rem;
+    border: 1px solid black;
+    overflow: hidden;
+    background-color: var(--link-base-background-color);
+  }
+
+  .list-second-level-entry-link:is(:hover, :focus) {
+    background-color: var(--link-hover-focus-background-color);
+  }
+}

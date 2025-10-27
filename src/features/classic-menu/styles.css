@@ -1,0 +1,125 @@
+
+@scope (.classic-wrapper) {
+  :scope {
+    inline-size: min(100%, 1280px);
+    padding: 1rem;
+    margin-inline: auto;
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .menu {
+    --transition-duration: 0.25s;
+    --link-base-background-color: white;
+    --link-hover-focus-background-color: red;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (prefers-reduced-motion) {
+    .menu {
+      --transition-duration: 0;
+    }
+  }
+
+  .list-first-level {
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  .list-first-level-entry {
+    position: relative;
+    container-name: first-level-entry;
+    container-type: normal;
+  }
+
+  .list-first-level-entry:has(> ul):is(:hover, :focus-within) > ul {
+    display: flex;
+    height: auto;
+    background: rgb(229, 231, 235);
+  }
+
+  .list-first-level-entry:has(> ul):is(:hover, :focus-within) > ul {
+    height: 0;
+  }
+
+  .list-first-level-entry-link {
+    display: block;
+    padding: 1rem;
+    height: 100%;
+    align-content: center;
+    border: 1px solid black;
+    background-color: var(--link-base-background-color);
+    overflow: hidden;
+  }
+
+  .list-first-level-entry-link:is(:hover, :focus) {
+    background-color: var(--link-hover-focus-background-color);
+  }
+
+  :is(:hover, :focus-within) > .list-first-level-entry-link {
+    background-color: var(--link-hover-focus-background-color);
+  }
+
+  /* +/- icon logic */
+  @container style(--has-children: true) {
+    .list-first-level-entry-link {
+      padding-right: 2.5rem;
+    }
+
+    .list-first-level-entry-link::before {
+      content: none;
+      display: block;
+      position: absolute;
+      inset: 0;
+      right: 1rem;
+      justify-self: end;
+      align-self: center;
+    }
+
+    /* submenu is not expanded */
+    :not(:is(:hover, :focus-within)) > .list-first-level-entry-link::before {
+      content: '+';
+    }
+
+    /* submenu is expanded */
+    :is(:hover, :focus-within) > .list-first-level-entry-link::before {
+      content: '-';
+    }
+  }
+
+  /* Second level menu styles */
+  .list-second-level {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-block-start: 1rem;
+    padding-inline: 0;
+    height: 0;
+    transition: height var(--transition-duration) ease;
+  }
+
+  .list-second-level-entry {
+    width: 100%;
+  }
+
+  .list-second-level-entry-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    background-color: var(--link-base-background-color);
+    border: 1px solid black;
+
+    &:is(:hover, :focus) {
+      background-color: var(--link-hover-focus-background-color);
+    }
+  }
+}
