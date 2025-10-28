@@ -1,5 +1,0 @@
-@position-try --below {
-  position-area: bottom left;
-  inset-block: calc(anchor(bottom) + 1rem);
-  inset-inline: anchor(start);
-}

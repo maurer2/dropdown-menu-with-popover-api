@@ -10,17 +10,8 @@
   }
 
   .menu {
-    --transition-duration: 0.25s;
-    --link-base-background-color: white;
-    --link-hover-focus-background-color: red;
     position: relative;
     z-index: 2;
-  }
-
-  @media (prefers-reduced-motion) {
-    .menu {
-      --transition-duration: 0;
-    }
   }
 
   .list-first-level {
@@ -32,8 +23,6 @@
 
   .list-first-level-entry {
     position: relative;
-    container-name: first-level-entry;
-    container-type: normal;
   }
 
   .list-first-level-entry:has(> .list-second-level):is(:hover, :focus-within) > .list-second-level {
@@ -41,7 +30,6 @@
     height: auto;
     height: calc-size(auto, size);
     content-visibility: visible;
-    background: var(--colors-gray-200);
 
     @starting-style {
       height: 0;
@@ -56,6 +44,7 @@
     border: 1px solid black;
     background-color: var(--link-base-background-color);
     overflow: clip;
+    anchor-name: --my-anchor;
   }
 
   .list-first-level-entry-link:is(:hover, :focus) {
@@ -97,15 +86,17 @@
   .list-second-level {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    inset-block-start: anchor(bottom);
     padding-block-start: 1rem;
     padding-inline: 0;
+    width: anchor-size(width);
     height: 0;
     flex-direction: column;
     gap: 0.5rem;
     overflow: clip;
+    position-anchor: --my-anchor;
+    position-area: bottom;
+    background: black content-box;
     transition:
       height var(--transition-duration) ease,
       display var(--transition-duration) ease,
