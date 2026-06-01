@@ -1,4 +1,4 @@
-import { useRef, useState, type ToggleEvent, type CSSProperties } from 'react';
+import { useState, type ToggleEvent } from 'react';
 import type { MenuStructure } from '#src/types';
 import './styles.css';
 
@@ -7,64 +7,64 @@ type PopoverMenuProps = {
 };
 
 function PopoverMenu({ menuEntries }: PopoverMenuProps) {
-  const popoverTargetRef = useRef<HTMLUListElement>(null);
-  // only used for aria-stuff
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [idOpenMenu, setIdOpenMenu] = useState<string | null>(null);
 
-  const handleToggle = (event: ToggleEvent<HTMLUListElement>) => {
-    console.log(event.oldState, '->', event.newState);
+  const handleToggle = (id: string) => (event: ToggleEvent<HTMLUListElement>) => {
+    if (event.newState === 'open') {
+      return setIdOpenMenu(id);
+    }
 
-    setIsExpanded(event.newState === 'open');
+    setIdOpenMenu(null);
   };
 
   return (
-    <section className="popover-wrapper">
-      <h2 className="page-title" id="popover-page-title">
-        Popover menu with anchor positioning and position-try fallback
-      </h2>
-
-      <nav className="menu" aria-labelledby="popover-page-title">
+    <section className="popover-wrapper" aria-labelledby="popover-page-title">
+      <header>
+        <h2 className="page-title" id="popover-page-title">
+          Popover menu
+        </h2>
+        <p className="page-description">
+          Anchor positioning with position-try fallback. Submenus open to the right or below
+          depending on available space.
+        </p>
+      </header>
+      <nav className="menu" aria-label="Main navigation with popover API">
         <ul className="list-first-level">
           {/* {menuEntries.toSpliced(1).map((entryFirstLevel) => ( */}
           {menuEntries.toSpliced(3).map((entryFirstLevel) => {
+            const hasLink = Boolean(entryFirstLevel.href);
             const hasSecondLevelNav = Boolean(entryFirstLevel.children?.length);
             const subMenuId = `${entryFirstLevel.label.toLocaleLowerCase()}-submenu`;
-            const anchorName = `--anchor-${entryFirstLevel.label.toLocaleLowerCase()}`;
+            const isExpanded = idOpenMenu === subMenuId;
 
             return (
-              <li
-                className="list-first-level-entry"
-                style={{ anchorName: anchorName } as CSSProperties}
-              >
+              <li className="list-first-level-entry" key={entryFirstLevel.label}>
                 <a
-                  key={entryFirstLevel.label}
-                  href={entryFirstLevel.href ? entryFirstLevel.href : '#'}
                   className="list-first-level-entry-link"
+                  href={hasLink ? entryFirstLevel.href : undefined}
+                  aria-disabled={hasLink ? undefined : true}
+                  role={hasLink ? undefined : 'link'}
                 >
                   {entryFirstLevel.label}
                 </a>
                 {hasSecondLevelNav ? (
                   <>
                     <button
-                      className="list-first-level-entry-toggle-button"
+                      type="button"
+                      className="list-first-level-entry-toggle-button" // actually a disclosure button -> aria-expanded
                       popoverTarget={subMenuId}
                       popoverTargetAction="toggle"
-                      type="button"
-                      aria-haspopup="menu"
                       aria-controls={subMenuId}
                       aria-expanded={isExpanded}
-                      aria-label={isExpanded ? 'Collapse submenu' : 'Expand submenu'}
+                      aria-label={`${entryFirstLevel.label} submenu`} // disclosure buttons shouldn't change their label depending on the state of the submenu they control
                     >
                       {isExpanded ? '-' : '+'}
                     </button>
-
                     <ul
                       id={subMenuId}
                       className="list-second-level"
                       popover="auto"
-                      ref={popoverTargetRef}
-                      onToggle={handleToggle}
-                      style={{ positionAnchor: anchorName } as CSSProperties}
+                      onToggle={handleToggle(subMenuId)}
                     >
                       {entryFirstLevel.children.map((entrySecondLevel) => (
                         <li className="list-second-level-entry">

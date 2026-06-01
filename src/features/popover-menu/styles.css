@@ -5,13 +5,17 @@
     margin-inline: auto;
   }
 
-  @position-try --full-width-below {
+  @position-try --below-entry {
     position-area: bottom;
     inset-block-start: calc(anchor(bottom) + 1rem);
     inset-inline: 0;
   }
 
   .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-description {
     margin-bottom: 1rem;
   }
 
@@ -24,15 +28,14 @@
     /* grid-auto-flow: column;
     grid-auto-columns: minmax(0, 1fr); */
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    /* currently buggy for repeated elements like ul>li: https://issuetracker.google.com/issues/373815812?utm_source=chatgpt.com&pli=1 */
-    /* anchor-scope: --first-level-entry-anchor; */
   }
 
   .list-first-level-entry {
     display: grid;
     grid-template-columns: 1fr;
     border: 1px solid black;
-    /* anchor-name: --first-level-entry-anchor; */
+    anchor-name: --submenu-anchor;
+    anchor-scope: --submenu-anchor;
 
     &:has(> .list-second-level) {
       grid-template-columns: 1fr auto;
@@ -70,9 +73,9 @@
     width: anchor-size(width);
     gap: 1rem;
     flex-direction: column;
-    /* position-anchor: --first-level-entry-anchor; */
+    position-anchor: --submenu-anchor;
     position-area: bottom right;
-    position-try: --full-width-below;
+    position-try: --below-entry;
     background: none;
 
     &:popover-open {
